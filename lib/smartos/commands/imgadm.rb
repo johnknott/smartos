@@ -48,23 +48,38 @@ module SmartOS
           #imgadm update #{Array(uuids).join(' ')}
         end
 
-        def create(vm_uuid, manifest: {}, output: nil, compression: 'none', incremental: false, script: nil, publish: nil, max_origin_depth: nil)
-          #Imgadm.create('f7a53e9-fc4d-d94b-9205-9ff110742aaf', manifest:{name: 'NewImage', version: '1.0.0'}, script: '/var/tmp/prep-image.sh', output: '/var/tmp')
+        #puts Imgadm.create('f7a53e9-fc4d-d94b-9205-9ff110742aaf', manifest:{name: 'NewImage', version: '1.0.0'}, script: '/var/tmp/prep-image.sh', output: '/var/tmp')
+        def create(vm_uuid, manifest: nil, output: nil, compression: 'none', incremental: false, script: nil, publish: nil, max_origin_depth: nil)
           raise 'Imgadm#create: Only one of -o(utput) or -p(ublish) may be specified' if output && publish
-          str_script = script ? "-s #{script} " : nil
-          str_compression = "-c #{compression} "
-          str_output = output ? "-o #{output} " : nil
-          str_publish = publish ? "-p #{publish} " : nil
-          str_max_origin_depth = max_origin_depth ? "--max-origin-depth #{max_origin_depth} " : nil
-          str_incremental = incremental ? "-i " : nil
-          str_command = "imgadm create #{str_script}#{str_compression}#{str_output}#{str_publish}#{str_max_origin_depth}#{str_incremental} -q"
+          raise 'Imgadm#create: Manifest must be passed as either a Hash or a String' unless ['Hash','String'].include?(manifest.class.to_s)
+          flags = [ {flag: '-s', value: script},
+                    {flag: '-c', value: compression},
+                    {flag: '-o', value: output},
+                    {flag: '-p', value: publish},
+                    {flag: '--max-origin-depth', value: max_origin_depth},
+                    {flag: '-i', value: incremental}]
+
+          flags_string = flags.map{ |f| f[:value] ? "#{f[:flag]} #{f[:value]} " : nil}.compact.join('')
+
+          if manifest.is_a? Hash
+            str_command = "echo '#{manifest.to_json}' | imgadm create #{flags_string}-q -m - #{vm_uuid}"
+          elsif manifest.is_a? String
+            str_command = "imgadm create #{flags_string}-q -m #{manifest} #{vm_uuid}"
+          end
+          puts str_command
         end
 
         def publish
           #TODO
         end
-      end
 
+        private
+
+        def optionify(flag, value)
+          value ? "#{flag} #{value} " : nil
+        end
+
+      end
 
     end
   end

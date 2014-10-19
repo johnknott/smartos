@@ -1,4 +1,5 @@
-require "smartos/version"
+require 'smartos/version'
+require 'json'
 require 'smartos/commands/imgadm'
 
 module SmartOS
