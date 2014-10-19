@@ -1,6 +1,7 @@
 module SmartOS
   class GlobalZone
     attr_reader :imgadm
+    include SmartOS::Commands
 
     def initialize(ssh)
       @imgadm = Imgadm.new(ssh)
