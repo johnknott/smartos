@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["John Knott"]
   spec.email         = ["john.knott@gmail.com"]
   spec.summary       = %q{Ruby library that wraps SmartOS executables such as vmadm, imgadm, and svcadm}
-  spec.description   = %q{This library can be used to remotely provision a SmartOS global zone. It could be used in scripts to automate the setup of an infrastructure.}
+  spec.description   = %q{This library can be used to remotely provision a SmartOS global zone. It could be used in scripts to automate the initial setup of an infrastructure, before handing off to a fully featured config management tool such as Salt, Ansible, Puppet or Chef.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
