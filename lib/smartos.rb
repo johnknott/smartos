@@ -1,5 +1,6 @@
 require "smartos/version"
+require 'smartos/commands/imgadm'
 
-module Smartos
+module SmartOS
   # Your code goes here...
 end

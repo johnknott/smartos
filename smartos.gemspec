@@ -5,7 +5,7 @@ require 'smartos/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "smartos"
-  spec.version       = Smartos::VERSION
+  spec.version       = SmartOS::VERSION
   spec.authors       = ["John Knott"]
   spec.email         = ["john.knott@gmail.com"]
   spec.summary       = %q{Ruby library that wraps SmartOS executables such as vmadm, imgadm, and svcadm}
