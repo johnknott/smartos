@@ -1,7 +1,7 @@
 # Smartos
 
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
-* Doesn't require anything to be installed in the Global Zone..
+* Doesn't require anything to be installed in the Global Zone.
 
 ## Installation
 

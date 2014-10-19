@@ -22,37 +22,43 @@ module SmartOS
         end
 
         def avail
-          #imgadm avail -j
           result = ssh_exec!("imgadm avail -j")
-          result.success? ? true : handle_error(result)
+          result.success? ? JSON.parse(result.stdout) : handle_error(result)
         end
 
         def import(uuid, pool: 'zones')
-          #imgadm import #{uuid} -P #{pool} -q
+          result = ssh_exec!("imgadm import #{uuid} -P #{pool} -q")
+          result.success? ? true : handle_error(result)
         end
 
         def install(manifest, file, pool: 'zones')
-          #imgadm import -P #{pool} -m #{manifest} -f #{file} -q
+          result = ssh_exec!("imgadm import -P #{pool} -m #{manifest} -f #{file} -q")
+          result.success? ? true : handle_error(result)
         end
 
         def list
-          #imgadm list -j
+          result = ssh_exec!("imgadm list -j")
+          result.success? ? JSON.parse(result.stdout) : handle_error(result)
         end
 
         def show(uuid)
-          #imgadm show #{uuid}
+          result = ssh_exec!("imgadm show #{uuid}")
+          result.success? ? JSON.parse(result.stdout) : handle_error(result)
         end
 
         def get(uuid, pool: 'zones')
-          #imgadm get #{uuid} -P #{pool}
+          result = ssh_exec!("imgadm get #{uuid} -P #{pool}")
+          result.success? ? JSON.parse(result.stdout) : handle_error(result)
         end
 
         def delete(uuid, pool: 'zones')
-          #imgadm delete #{uuid} -P #{pool}
+          result = ssh_exec!("imgadm delete #{uuid} -P #{pool}")
+          result.success? ? true : handle_error(result)
         end
 
         def update(uuids)
-          #imgadm update #{Array(uuids).join(' ')}
+          result = ssh_exec!("imgadm update #{Array(uuids).join(' ')}")
+          result.success? ? true : handle_error(result)
         end
 
         #puts Imgadm.create('f7a53e9-fc4d-d94b-9205-9ff110742aaf', manifest:{name: 'NewImage', version: '1.0.0'}, script: '/var/tmp/prep-image.sh', output: '/var/tmp')
