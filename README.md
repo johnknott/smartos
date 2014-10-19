@@ -1,4 +1,5 @@
 [![Build Status](https://api.shippable.com/projects/544442a6b904a4b21567add5/badge?branchName=master)](https://app.shippable.com/projects/544442a6b904a4b21567add5/builds/latest)
+[![Coverage Status](https://img.shields.io/coveralls/johnknott/smartos.svg)](https://coveralls.io/r/johnknott/smartos)
 
 # Smartos
 
