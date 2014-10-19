@@ -49,11 +49,16 @@ module SmartOS
         def update(uuids)
           exec("imgadm update #{Array(uuids).join(' ')}")
         end
+        
+        def publish(imgapi_url)
+          exec("imgadm publish -m #{manifest} -f #{file} -q #{imgapi_url}")
+        end
 
-        def create(vm_uuid, manifest: nil, output: nil, compression: 'none', incremental: false, script: nil, publish: nil, max_origin_depth: nil)
-          raise 'Imgadm#create: Only one of -o(utput) or -p(ublish) may be specified' if output && publish
-          raise 'Imgadm#create: Manifest must be passed as either a Hash or a String' unless ['Hash','String'].include?(manifest.class.to_s)
-          
+        def create( vm_uuid, manifest: nil, output: nil, compression: 'none',
+                    incremental: false, script: nil, publish: nil, max_origin_depth: nil)
+          raise 'Only one of -o(utput) or -p(ublish) may be specified' if output && publish
+          raise 'Manifest must be passed as either a Hash or a String' unless ['Hash','String'].include?(manifest.class.to_s)
+
           flags = [ {flag: '-s', value: script},
                     {flag: '-c', value: compression},
                     {flag: '-o', value: output},
@@ -68,11 +73,7 @@ module SmartOS
           elsif manifest.is_a? String
             str_command = "imgadm create #{flags_string}-q -m #{manifest} #{vm_uuid}"
           end
-          puts str_command
-        end
-
-        def publish
-          #TODO
+          exec(str_command)
         end
 
         private
