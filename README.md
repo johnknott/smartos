@@ -22,14 +22,14 @@ Or install it yourself as:
 ## Usage
 
 Assumes you have passwordless authentication setup to root@your-global-zone.
-If you haven't yet, you can do this with ( ssh-copy-id root@your-global-zone )
+If you haven't yet, you can do this with (`ssh-copy-id root@your-global-zone`)
 
 First connect to your global zone with ( connect ) then inside the block run commands like imgadm, vmadm, and svcadm.
 
-  SmartOS::GlobalZone.connect('your-global-zone.com') do
-    imgadm.add_source 'http://datasets.at/'
-    puts imgadm.sources
-  end
+    SmartOS::GlobalZone.connect('your-global-zone.com') do
+      imgadm.add_source 'http://datasets.at/'
+      puts imgadm.sources
+    end
 
 
 ## Contributing
