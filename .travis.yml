@@ -7,6 +7,9 @@ rvm:
 script: 'bundle exec rake'
 cache: true
 
+after_success:
+  coveralls
+
 notifications:
   email:
     recipients:
