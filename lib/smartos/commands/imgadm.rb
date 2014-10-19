@@ -1,23 +1,30 @@
 module SmartOS
-  module Command
-    class Imgadm
+  module Commands
+    class Imgadm < Command
 
-      class << self
+        def initialize(ssh)
+          @ssh = ssh
+        end
+
         def sources
-          #imgadm sources -j
-          puts  "monkey"
+          result = ssh_exec!("imgadm sources -j")
+          result.success? ? JSON.parse(result.stdout) : handle_error(result)
         end
 
         def add_source(url)
-          #imgadm sources -a #{url}
+          result = ssh_exec!("imgadm sources -a #{url}")
+          result.success? ? true : handle_error(result)
         end
 
         def delete_source(url)
-          #imgadm sources -a #{url}
+          result = ssh_exec!("imgadm sources -d #{url}")
+          result.success? ? true : handle_error(result)
         end
 
         def avail
           #imgadm avail -j
+          result = ssh_exec!("imgadm avail -j")
+          result.success? ? true : handle_error(result)
         end
 
         def import(uuid, pool: 'zones')
@@ -75,11 +82,17 @@ module SmartOS
 
         private
 
-        def optionify(flag, value)
-          value ? "#{flag} #{value} " : nil
-        end
+        def handle_error(result)
+          desc = case result.exitcode.to_i
+          when 1 then "An error occurred"
+          when 2 then "Usage error"
+          when 3 then "ImageNotInstalled error"
+          else "Unknown error"
+          end
 
-      end
+          err = "#{desc} - #{result.stderr}"
+          raise SmartOS::Commands::Error,err
+        end
 
     end
   end
