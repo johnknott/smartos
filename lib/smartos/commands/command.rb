@@ -39,6 +39,16 @@ module SmartOS
         ssh.loop
         Result.new(stdout_data,stderr_data,exit_code,exit_signal)
       end
+
+      def exec(command, json: false)
+        result = ssh_exec!(command)
+        if result.success?
+          json ? JSON.parse(result.stdout) : true
+        else
+          handle_error(result)
+        end
+      end
+
     end
 
     class Error < StandardError; end
