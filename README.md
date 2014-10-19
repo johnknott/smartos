@@ -3,9 +3,9 @@
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
 * Doesn't require anything to be installed in the Global Zone.
 
-## Installation
+## Installation 
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile :
 
 ```ruby
 gem 'smartos'
