@@ -1,3 +1,5 @@
+[![Build Status](https://api.shippable.com/projects/544442a6b904a4b21567add5/badge?branchName=master)](https://app.shippable.com/projects/544442a6b904a4b21567add5/builds/latest)
+
 # Smartos
 
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
@@ -5,7 +7,7 @@
 
 ## Installation 
 
-Add this line to your application's Gemfile :
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'smartos'
