@@ -29,16 +29,17 @@ Assumes you have passwordless authentication setup to root@your-global-zone.
 If you haven't yet, you can do this with (`ssh-copy-id root@your-global-zone`)
 
 First connect to your global zone with ( connect ) then inside the block run commands like imgadm, vmadm, and svcadm.
-
-    SmartOS::GlobalZone.connect('your-global-zone.com') do
-      imgadm.add_source 'http://datasets.at/'
-      puts imgadm.sources
-    end
+```ruby
+SmartOS::GlobalZone.connect('your-global-zone.com') do
+  imgadm.add_source 'http://datasets.at/'
+  puts imgadm.sources
+end
+```
 
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/smartos/fork )
+1. Fork it ( https://github.com/johnknott/smartos/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

@@ -40,7 +40,7 @@ module SmartOS
         Result.new(stdout_data,stderr_data,exit_code,exit_signal)
       end
 
-      def exec(command, json: false)
+      def gz_exec(command, json: false)
         result = ssh_exec!(command)
         if result.success?
           json ? JSON.parse(result.stdout) : true

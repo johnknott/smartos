@@ -7,57 +7,57 @@ module SmartOS
         end
 
         def sources
-          exec("imgadm sources -j", json: true)
+          gz_exec("imgadm sources -j", json: true)
         end
 
         def add_source(url)
-          exec("imgadm sources -a #{url}")
+          gz_exec("imgadm sources -a #{url}")
         end
 
         def delete_source(url)
-          exec("imgadm sources -d #{url}")
+          gz_exec("imgadm sources -d #{url}")
         end
 
         def avail
-          exec("imgadm avail -j", json: true)
+          gz_exec("imgadm avail -j", json: true)
         end
 
         def import(uuid, pool: 'zones')
-          exec("imgadm import #{uuid} -P #{pool} -q")
+          gz_exec("imgadm import #{uuid} -P #{pool} -q")
         end
 
         def install(manifest, file, pool: 'zones')
-          exec("imgadm import -P #{pool} -m #{manifest} -f #{file} -q")
+          gz_exec("imgadm import -P #{pool} -m #{manifest} -f #{file} -q")
         end
 
         def list
-          exec("imgadm list -j", json: true)
+          gz_exec("imgadm list -j", json: true)
         end
 
         def show(uuid)
-          exec("imgadm show #{uuid}", json: true)
+          gz_exec("imgadm show #{uuid}", json: true)
         end
 
         def get(uuid, pool: 'zones')
-          exec("imgadm get #{uuid} -P #{pool}", json: true)
+          gz_exec("imgadm get #{uuid} -P #{pool}", json: true)
         end
 
         def delete(uuid, pool: 'zones')
-          exec("imgadm delete #{uuid} -P #{pool}")
+          gz_exec("imgadm delete #{uuid} -P #{pool}")
         end
 
         def update(uuids)
-          exec("imgadm update #{Array(uuids).join(' ')}")
+          gz_exec("imgadm update #{Array(uuids).join(' ')}")
         end
-        
+
         def publish(imgapi_url)
-          exec("imgadm publish -m #{manifest} -f #{file} -q #{imgapi_url}")
+          gz_exec("imgadm publish -m #{manifest} -f #{file} -q #{imgapi_url}")
         end
 
         def create( vm_uuid, manifest: nil, output: nil, compression: 'none',
                     incremental: false, script: nil, publish: nil, max_origin_depth: nil)
           raise 'Only one of -o(utput) or -p(ublish) may be specified' if output && publish
-          raise 'Manifest must be passed as either a Hash or a String' unless ['Hash','String'].include?(manifest.class.to_s)
+          raise 'Manifest must be passed as either a Hash or a String' unless [Hash,String].include?(manifest.class)
 
           flags = [ {flag: '-s', value: script},
                     {flag: '-c', value: compression},
@@ -68,12 +68,11 @@ module SmartOS
 
           flags_string = flags.map{ |f| f[:value] ? "#{f[:flag]} #{f[:value]} " : nil}.compact.join('')
 
-          if manifest.is_a? Hash
-            str_command = "echo '#{manifest.to_json}' | imgadm create #{flags_string}-q -m - #{vm_uuid}"
-          elsif manifest.is_a? String
-            str_command = "imgadm create #{flags_string}-q -m #{manifest} #{vm_uuid}"
+          gz_exec case manifest.class
+            when String then "imgadm create #{flags_string}-q -m #{manifest} #{vm_uuid}"
+            when Hash then "echo '#{manifest.to_json}' | imgadm create #{flags_string}-q -m - #{vm_uuid}"
           end
-          exec(str_command)
+
         end
 
         private
