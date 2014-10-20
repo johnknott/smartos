@@ -1,5 +1,6 @@
 [![Build Status](https://api.shippable.com/projects/544442a6b904a4b21567add5/badge?branchName=master)](https://app.shippable.com/projects/544442a6b904a4b21567add5/builds/latest)
-[![Coverage Status](https://img.shields.io/coveralls/johnknott/smartos.svg)](https://coveralls.io/r/johnknott/smartos)
+[![Code Climate](https://codeclimate.com/github/johnknott/smartos/badges/gpa.svg)](https://codeclimate.com/github/johnknott/smartos)
+[![Test Coverage](https://codeclimate.com/github/johnknott/smartos/badges/coverage.svg)](https://codeclimate.com/github/johnknott/smartos)
 
 # Smartos
 
