@@ -5,7 +5,11 @@
 # Smartos
 
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
+* Use the same commands and syntax you would to administer the Global Zone locally.
+* Results are automatically parsed into JSON, true/false, Arrays etc.
 * Doesn't require anything to be installed in the Global Zone.
+* Optionally raises exceptions when commands fail.
+* Can return stdout, stderr, exitcode and exitsignal.
 
 ## Installation 
 
@@ -59,7 +63,7 @@ SmartOS::GlobalZone.connect('your-global-zone.com') do
   # Create a VM as defined in the manifest
   vmadm! "create -f /tmp/machine.json"
 
-  # Run an aribtrary command. Result is mapped to boolean.
+  # Run an abitrary command. Result is mapped to boolean.
   svcprop '-c -p general/enabled system/cron:default'
   # => true
 end
