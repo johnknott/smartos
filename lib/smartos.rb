@@ -3,9 +3,6 @@ require 'json'
 require 'pry'
 require 'net/ssh/simple'
 require 'smartos/commands/command'
-require 'smartos/commands/imgadm'
-require 'smartos/commands/vmadm'
-require 'smartos/commands/svcadm'
 require 'smartos/global_zone'
 
 module SmartOS
