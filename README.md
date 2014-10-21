@@ -33,6 +33,7 @@ First connect to your global zone with `connect` then inside the block run comma
 The library inspects the remote SmartOS system and dynamically defines helper methods to execute all binaries in the PATH.
 
 Bang and non-bang methods are created. Bang methods raise an exception on a non-zero exit code and return the result which is parsed if possible, for example into JSON, boolean values, or arrays. This version is more amenable to method-chaining.
+
 Non-bang methods do not throw exceptions but return more information - exitcode, exitsignal, stdout, and stderr. Calling the methods this way is more work but gives you more flexibility.
 
 ```ruby
