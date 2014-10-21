@@ -64,8 +64,12 @@ SmartOS::GlobalZone.connect('your-global-zone.com') do
   vmadm! "create -f /tmp/machine.json"
 
   # Run an abitrary command. Result is mapped to boolean.
-  svcprop '-c -p general/enabled system/cron:default'
+  svcprop! '-c -p general/enabled system/cron:default'
   # => true
+
+  # Example of a command without the bang. This provides more diagnostic information.
+  svcadm 'enable doesntexist'
+  # => #<struct SmartOS::Commands::CommandResult stdout="", stderr="svcadm: Pattern 'doesntexist' doesn't match any instances\n", exitcode=1, exitsignal=nil>
 end
 ```
 
