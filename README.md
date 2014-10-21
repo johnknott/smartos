@@ -38,7 +38,7 @@ SmartOS::GlobalZone.connect('your-global-zone.com') do
 
   # Add a dataset source
   imgadm! "sources -a 'http://datasets.at/'"
-  # Remove a datase source
+  # Remove a dataset source
   imgadm! "sources -d 'https://images.joyent.com'"
   # Update currently installed datasets if needed
   imgadm! "update"
@@ -51,13 +51,14 @@ SmartOS::GlobalZone.connect('your-global-zone.com') do
 
   # Get an array of available images and map return an array of names
   imgadm!("avail -j").map{|i| i['manifest']['name']}
+  # => ["postgresql","steelapp-developer","jenkins", "neo4j","couchdb" ...]
 
   # Create a VM as defined in the manifest
   vmadm! "create -f /tmp/machine.json"
 
   # Run an aribtrary command. Result is mapped to boolean.
   svcprop '-c -p general/enabled system/cron:default'
-  => true
+  # => true
 end
 ```
 
