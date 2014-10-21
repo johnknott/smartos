@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = SmartOS::VERSION
   spec.authors       = ["John Knott"]
   spec.email         = ["john.knott@gmail.com"]
-  spec.summary       = %q{Ruby library that wraps SmartOS executables such as vmadm, imgadm, and svcadm}
+  spec.summary       = %q{Simple Ruby library that wraps SmartOS executables such as vmadm, imgadm, and svcadm}
   spec.description   = %q{This library can be used to remotely provision a SmartOS global zone. It could be used in scripts to automate the initial setup of an infrastructure, before handing off to a fully featured config management tool such as Salt, Ansible, Puppet or Chef.}
   spec.homepage      = ""
   spec.license       = "MIT"
@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "pry"
-  spec.add_dependency "net-ssh-simple"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
