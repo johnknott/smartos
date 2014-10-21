@@ -30,25 +30,34 @@ If you haven't yet, you can do this with (`ssh-copy-id root@your-global-zone.com
 
 First connect to your global zone with `connect` then inside the block run commands like imgadm, vmadm, and svcadm using the usual syntax.
 The library inspects the remote SmartOS system and dynamically defines helper methods to execute all binaries in the PATH.
-Bang and non-bang methods are created. Bang methods raise an exception on a non-zero exit code, while non-bang methods do not.
-If the command is successful, the library will attempt to parse the stdout as JSON. If it fails stdout will be left as text.
+Bang and non-bang methods are created. Bang methods raise an exception on a non-zero exit code and return the result which is parsed if possible, for example into JSON, boolean values, or arrays. This version is more amenable to method-chaining.
+Non-bang methods do not throw exceptions but return more information - exitcode, exitsignal, stdout, and stderr. Calling the methods this way is more work but gives you more flexibility.
 
 ```ruby
 SmartOS::GlobalZone.connect('your-global-zone.com') do
 
+  # Add a dataset source
   imgadm! "sources -a 'http://datasets.at/'"
+  # Remove a datase source
   imgadm! "sources -d 'https://images.joyent.com'"
+  # Update currently installed datasets if needed
   imgadm! "update"
 
-  imgadm!("sources -j").stdout.each do |source_url|
+  # Bring back the sources and loop through them
+  # The JSON is automatically parsed
+  imgadm!("sources -j").each do |source_url|
     puts source_url
   end
 
-  imgadm!("avail -j").stdout.map{|i| i['manifest']['description']}
-  
+  # Get an array of available images and map return an array of names
+  imgadm!("avail -j").map{|i| i['manifest']['name']}
+
+  # Create a VM as defined in the manifest
   vmadm! "create -f /tmp/machine.json"
 
+  # Run an aribtrary command. Result is mapped to boolean.
   svcprop '-c -p general/enabled system/cron:default'
+  => true
 end
 ```
 

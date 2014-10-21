@@ -12,8 +12,8 @@ module SmartOS
 
     def initialize(ssh)
       @ssh = ssh
-      all_binaries = remote_exec!('compgen -c').stdout.split("\n")
-      unwanted_binaries = remote_exec!('compgen -A function -abk').stdout.split("\n")
+      all_binaries = remote_exec!('compgen -c').split("\n")
+      unwanted_binaries = remote_exec!('compgen -A function -abk').split("\n")
       wanted_binaries = all_binaries - unwanted_binaries
 
       wanted_binaries.each do |res| 

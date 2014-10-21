@@ -46,13 +46,17 @@ module SmartOS
       if result.success? 
         begin
           json = JSON.parse(result.stdout)
-          result.stdout = json
+          return json
         rescue => e
+        end
+        case result.stdout.strip 
+        when 'true' then return true
+        when 'false' then return false
         end
       else
         raise CommandError, "Exitcode: #{result.exitcode} - #{result.stderr}" 
       end
-      result
+      result.stdout
     end
 
     def remote_exec(command)
