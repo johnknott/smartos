@@ -69,7 +69,9 @@ SmartOS::GlobalZone.connect('your-global-zone.com') do
 
   # Example of a command without the bang. This provides more diagnostic information.
   svcadm 'enable doesntexist'
-  # => #<struct SmartOS::Commands::CommandResult stdout="", stderr="svcadm: Pattern 'doesntexist' doesn't match any instances\n", exitcode=1, exitsignal=nil>
+  # =>  #<struct SmartOS::Commands::CommandResult stdout="",
+          stderr="svcadm: Pattern 'doesntexist' doesn't match any instances\n",
+          exitcode=1, exitsignal=nil>
 end
 ```
 
