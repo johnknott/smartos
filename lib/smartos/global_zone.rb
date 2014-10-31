@@ -10,6 +10,17 @@ module SmartOS
       end
     end
 
+    def self.is_global_zone?(host)
+      Net::SSH.start(host, 'root', timeout: 5) do |ssh|
+        if ssh.exec!('/usr/bin/zonename').strip == 'global'
+          return ssh.exec!('/usr/bin/uname -a').strip
+        end
+      end
+      nil
+    rescue => e
+      #puts e.message
+    end
+
     def initialize(ssh)
       @ssh = ssh
       all_binaries = remote_exec!('compgen -c').split("\n")
