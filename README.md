@@ -1,4 +1,4 @@
-[![Build Status](https://api.shippable.com/projects/544442a6b904a4b21567add5/badge?branchName=master)](https://app.shippable.com/projects/544442a6b904a4b21567add5/builds/latest)
+[ ![Codeship Status for johnknott/smartos](https://www.codeship.io/projects/0a9dcd30-46aa-0132-eca2-5e6bdb927434/status)](https://www.codeship.io/projects/45381)
 [![Code Climate](https://codeclimate.com/github/johnknott/smartos/badges/gpa.svg)](https://codeclimate.com/github/johnknott/smartos)
 [![Test Coverage](https://codeclimate.com/github/johnknott/smartos/badges/coverage.svg)](https://codeclimate.com/github/johnknott/smartos)
 
