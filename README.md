@@ -3,7 +3,7 @@
 [![Test Coverage](https://codeclimate.com/github/johnknott/smartos/badges/coverage.svg)](https://codeclimate.com/github/johnknott/smartos)
 [![Dependency Status](https://gemnasium.com/johnknott/smartos.svg)](https://gemnasium.com/johnknott/smartos)
 [![Build Status](https://api.shippable.com/projects/545966a0a85d45d063d9016e/badge?branchName=master)](https://app.shippable.com/projects/545966a0a85d45d063d9016e/builds/latest)
-# Smartos
+# SmartOS
 
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
 * Use the same commands and syntax you would to administer the Global Zone locally.
