@@ -2,8 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/johnknott/smartos/badges/gpa.svg)](https://codeclimate.com/github/johnknott/smartos)
 [![Test Coverage](https://codeclimate.com/github/johnknott/smartos/badges/coverage.svg)](https://codeclimate.com/github/johnknott/smartos)
 [![Dependency Status](https://gemnasium.com/johnknott/smartos.svg)](https://gemnasium.com/johnknott/smartos)
-[![wercker status](https://app.wercker.com/status/d751c98a5b1fab5f073f8c3d6e36c616/m "wercker status")](https://app.wercker.com/project/bykey/d751c98a5b1fab5f073f8c3d6e36c616)
-
+[![Build Status](https://api.shippable.com/projects/545966a0a85d45d063d9016e/badge?branchName=master)](https://app.shippable.com/projects/545966a0a85d45d063d9016e/builds/latest)
 # Smartos
 
 * A small library to help manage a SmartOS Global Zone remotely using Ruby.
