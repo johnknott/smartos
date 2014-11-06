@@ -12,8 +12,10 @@ before_script:
   - mkdir -p shippable/testresults
 # write the rspec tests to the output dir
 script:
-  - CODECLIMATE_REPO_TOKEN=21f0f70d0d443c04017bc1a106d376a96bc52e150dfc8efc8708db1bacc773eb rspec -f documentation -o shippable/testresults/results.xml
+  - rspec -f documentation -o shippable/testresults/results.xml
 notifications:
  email:
      recipients:
          - john.knott@gmail.com
+env:
+  - secure: tncBcSblTJjptQ2vD0w/DZiZcSqk2FN/z3o4gKVfQI3Ok+I4zIrYH0YUhY8DHHvlQeWo/JkY+VPLfK4KYVGWEATrDekvv0g1XdF6B79pMmFBsqUOSfbFBe8WJwzvPEXBKuvpgAlW8Jov864WCRxoMaluLfcUy2iwaxP/4+vWwA6lxyH7MuHDRf20qsq7HKQ/8UkOvid6mzjLxFUGgrjt1ejDgHXpaSDQ+so/O/l/7UsOAHfaCEiI9SSdg2S0Gtdxi4CHNRcSQuFOfxYrkXPBdMfzGWGB/7M0fbvdZeQ116IQvUgiX57wF5S4bdm55ln9Fr4pc0KEV1T7btJhCodpGA==
